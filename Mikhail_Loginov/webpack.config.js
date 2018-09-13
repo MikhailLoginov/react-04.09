@@ -1,6 +1,6 @@
 const path = require('path');
-const ExtractTextPlugin = require('C:/Users/mikhail_l/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/extract-text-webpack-plugin');
-const HtmlPlugin = require('C:/Users/mikhail_l/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {

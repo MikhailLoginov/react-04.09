@@ -1,17 +1,21 @@
 import './Layout.css';
 
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 
-import MainPage from 'components/MainPage';
+import Header from 'components/Header';
+import Content from 'components/Content';
+import Footer from 'components/Footer';
 
 export default class Layout extends Component {
 
-    render() {
-      
-      return (
-        <div className="layout">
-          <MainPage />
-        </div>
-      );
-    }
+  render() {
+
+    return (
+      <Fragment>
+        <Header/>
+        <Content/>
+        <Footer/>
+      </Fragment>
+    );
+  }
 }

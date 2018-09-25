@@ -1,4 +1,4 @@
-import './Content.css';
+import './Rooms.css';
 
 import React, {PureComponent} from 'react';
 import {
@@ -10,33 +10,25 @@ import {
   Container
 } from 'reactstrap';
 
-import app from '../../index';
+import {SERVER_ADDRESS, SERVER_PORT} from '../../config/server.js';
 import Message from 'components/Message';
-
-const USER_ID = 1; // Hardcoded current user ID
 
 export default class Content extends PureComponent {
   state = {
     messageAuthor: '',
     messageText: '',
     messages: [],
-    authors: [],
   }
 
   componentDidMount() {
-    app.get('messages').then(res => {
+    fetch(`${SERVER_ADDRESS}:${SERVER_PORT}/messages`).then(res => {
       res.json().then(res => {
-        this.setState({messages: res});
-      })
-    });
-    app.get('users').then(res => {
-      res.json().then(res => {
-        this.setState({authors: res});
-      })
+          this.setState({messages: res});
+        })
     })
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -45,13 +37,21 @@ export default class Content extends PureComponent {
   handleSubmitClick = () => {
     let message = {
       text: this.state.messageText,
-      authorID: USER_ID
+      author: this.state.messageAuthor
     }
-    app.post('messages', JSON.stringify(message)).then(res => {
+    fetch(`${SERVER_ADDRESS}:${SERVER_PORT}/messages`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(message)
+    }).then(res => {
       res
         .json()
         .then(res => {
+          console.log(res);
           let updatedMessages = this.state.messages.concat(res);
+          console.log(updatedMessages);
           this.setState({messages: updatedMessages});
         })
     });
@@ -59,16 +59,10 @@ export default class Content extends PureComponent {
   }
 
   render() {
-    let renderedMessages = '';
-    if (this.state.authors.length !== 0 ) {
-      renderedMessages = this.state.messages.map((message, index) => {
-        let author = this.state.authors[message.authorID-1];
-        if (author.id === USER_ID) {
-          author.firstName = 'You';
-        }
-        return <Message key={index} message={message} author={author}/>;
-      });
-    }
+    const renderedMessages = this
+      .state
+      .messages
+      .map((message, index) => <Message key={index} message={message}/>);
     return (
       <main>
         <Container>

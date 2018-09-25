@@ -1,5 +1,3 @@
-import './Chat.css';
-
 import React, {PureComponent} from 'react';
 import {
   Form,

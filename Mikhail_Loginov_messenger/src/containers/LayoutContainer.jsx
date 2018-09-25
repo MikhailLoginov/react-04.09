@@ -15,8 +15,8 @@ export default class LayoutContainer extends PureComponent {
           <Switch>
             <Route exact path='/' component={RoomsContainer}/>
             <Route 
-              path='chat/:id' 
-              render={(props) => <Chat id={props.match.params.id}/>}
+              path='/chat/:authorID' 
+              render={(props) => <Chat authorID={props.match.params.authorID}/>}
             />
           </Switch>
           <Footer/>

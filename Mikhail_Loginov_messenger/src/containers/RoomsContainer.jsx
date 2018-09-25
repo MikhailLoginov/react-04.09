@@ -11,6 +11,8 @@ import {
 import Room from 'components/Room';
 import app from '../index';
 
+const USER_ID = 1; // Hardcoded user id of our hero
+
 export default class RoomsContainer extends PureComponent {
   state = {
     messages: [],
@@ -34,13 +36,15 @@ export default class RoomsContainer extends PureComponent {
     let renderedRooms = '';
     if (this.state.authors.length !== 0) {
       renderedRooms = this.state.authors.map((user, index) => {
-        let messageCounter = 0;
-        this.state.messages.forEach(message => {
-          if (message.authorID === user.id) {
-            messageCounter++;
-          }
-        })
-        return <Room key={index} user={user} messageCounter={messageCounter}/>
+        if (user.id !== USER_ID) {
+          let messageCounter = 0;
+          this.state.messages.forEach(message => {
+            if (message.authorID === user.id) {
+              messageCounter++;
+            }
+          })
+          return <Room key={index} user={user} messageCounter={messageCounter}/>
+        }
       });
     };
     return (

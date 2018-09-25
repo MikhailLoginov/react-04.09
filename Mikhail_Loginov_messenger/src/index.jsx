@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import LayoutContainer from 'containers/LayoutContainer';
-import App from './config/server';
+import App from './server';
 
 export default new App();
 

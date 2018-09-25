@@ -18,18 +18,11 @@ import {
 } from 'reactstrap';
 
 export default class Header extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false
-    };
+  state = {
+    modal: false
+  };
 
-    this.toggle = this
-      .toggle
-      .bind(this);
-  }
-
-  toggle() {
+  toggle = () => {
     this.setState({
       modal: !this.state.modal
     });

@@ -13,7 +13,7 @@ import Message from 'components/Message';
 
 const USER_ID = 1; // Hardcoded current user ID
 
-export default class Chat extends PureComponent {
+export default class ChatContainer extends PureComponent {
   state = {
     messageAuthor: '',
     messageText: '',

@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import {
   Form,
   FormGroup,
@@ -8,24 +8,22 @@ import {
   Container
 } from 'reactstrap';
 
-import app from '../../index';
-import Message from 'components/Message';
+import Room from 'components/Room';
+import app from '../index';
 
-const USER_ID = 1; // Hardcoded current user ID
-
-export default class Content extends PureComponent {
+export default class RoomsContainer extends PureComponent {
   state = {
     messages: [],
     authors: [],
   }
 
   componentDidMount() {
-    app.get('messages').then(res => {
+    app.get('messagesToYou').then(res => {
       res.json().then(res => {
         this.setState({messages: res});
       })
     });
-    app.get('users').then(res => {
+    app.get('contacts').then(res => {
       res.json().then(res => {
         this.setState({authors: res});
       })
@@ -33,24 +31,22 @@ export default class Content extends PureComponent {
   }
 
   render() {
-    let renderedMessages = '';
-    if (this.state.authors.length !== 0 ) {
-      renderedMessages = this.state.messages.map((message, index) => {
-        let author = this.state.authors[message.authorID-1];
-        if (author.id === USER_ID) {
-          author.firstName = 'You';
-        }
-        return <Message key={index} message={message} author={author}/>;
+    let renderedRooms = '';
+    if (this.state.authors.length !== 0) {
+      renderedRooms = this.state.authors.map((user, index) => {
+        let messageCounter = 0;
+        this.state.messages.forEach(message => {
+          if (message.authorID === user.id) {
+            messageCounter++;
+          }
+        })
+        return <Room key={index} user={user} messageCounter={messageCounter}/>
       });
-    }
+    };
     return (
-      <main>
-        <Container>
-          <div className="chat-wrapper">
-            {renderedMessages}
-          </div >
-        </Container>
-      </main >
-    );
+      <Fragment>
+        {renderedRooms}
+      </Fragment>
+    )
   }
 }

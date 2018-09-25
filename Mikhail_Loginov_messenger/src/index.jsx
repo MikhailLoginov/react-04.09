@@ -5,9 +5,9 @@ import 'normalize.css/normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Layout from 'components/Layout';
+import LayoutContainer from 'containers/LayoutContainer';
 import App from './config/server';
 
 export default new App();
 
-ReactDOM.render(<Layout />, document.getElementById('root'));
+ReactDOM.render(<LayoutContainer />, document.getElementById('root'));

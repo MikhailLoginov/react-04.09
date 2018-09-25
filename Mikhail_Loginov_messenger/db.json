@@ -1,5 +1,5 @@
 {
-  "messages": [
+  "messagesToYou": [
     {
       "id": 1,
       "text": "My awesome comment",
@@ -49,23 +49,31 @@
       "text": "yeah",
       "authorID": 4,
       "id": 10
-    },
+    }
+  ],
+  "messagesFromYou": [
     {
       "text": "1",
-      "authorID": 1,
-      "id": 11
+      "toUserID": 2,
+      "id": 1
     },
     {
       "text": "515215",
-      "authorID": 1,
-      "id": 12
+      "toUserID": 3,
+      "id": 2
+    },
+    {
+      "text": "441241512",
+      "toUserID": 4,
+      "id": 3
+    },
+    {
+      "text": "515215",
+      "toUserID": 3,
+      "id": 4
     }
   ],
-  "users": [
-    {
-      "id": 1,
-      "firstName": "Mikhail"
-    },
+  "contacts": [
     {
       "id": 2,
       "firstName": "John"
